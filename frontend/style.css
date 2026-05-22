@@ -1,0 +1,276 @@
+:root {
+    --primary-color: #3182ce;
+    --primary-hover: #2b6cb0;
+    --bg-color: #f7fafc;
+    --card-bg: #ffffff;
+    --text-color: #2d3748;
+    --text-muted: #718096;
+    --border-color: #e2e8f0;
+    --danger-color: #e53e3e;
+    --danger-bg: #fff5f5;
+    --success-color: #38a169;
+    --warning-color: #dd6b20;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 40px 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    color: #1a202c;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: var(--text-muted);
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    margin-bottom: 30px;
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+/* 폼 스타일 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.form-group-row .form-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+input[type="number"], select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input[type="number"]:focus, select:focus {
+    border-color: var(--primary-color);
+}
+
+/* 체크박스 그룹 */
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.checkbox-item input {
+    width: 16px;
+    height: 16px;
+}
+
+/* 버튼 스타일 */
+.btn-submit {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 25px;
+}
+
+.btn-submit:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+    padding: 8px 14px;
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-secondary:hover {
+    background: #ebf8ff;
+}
+
+/* 결과창 스타일 */
+.hidden {
+    display: none !important;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.result-header h2 {
+    border: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.user-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    background: #edf2f7;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+.summary-item {
+    font-size: 0.95rem;
+}
+
+.result-block {
+    margin-bottom: 25px;
+}
+
+.result-block h3 {
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+}
+
+/* 운동 리스트 아이템 */
+.exercise-list {
+    list-style: none;
+}
+
+.exercise-item {
+    background: #f7fafc;
+    border: 1px solid var(--border-color);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.exercise-info {
+    font-weight: 600;
+}
+
+.exercise-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.badge {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+}
+
+.badge.low { background-color: var(--success-color); }
+.badge.mid { background-color: var(--warning-color); }
+.badge.high { background-color: var(--danger-color); }
+
+/* 금지/주의 파트 */
+.forbidden-block {
+    background: var(--danger-bg);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #fed7d7;
+}
+
+.forbidden-block h3 { color: var(--danger-color); }
+
+.source-group {
+    margin-bottom: 10px;
+}
+.source-title {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #9b2c2c;
+    margin-bottom: 4px;
+}
+.source-items {
+    padding-left: 15px;
+    font-size: 0.95rem;
+}
+
+/* 이유 및 주의사항 */
+.reason-block { background: #ebf8ff; padding: 15px; border-radius: 8px; border: 1px solid #bee3f8;}
+.reason-block h3 { color: #2b6cb0; }
+.reason-block ul, .caution-block ul { padding-left: 20px; font-size: 0.95rem;}
+
+.caution-block { background: #fffaf0; padding: 15px; border-radius: 8px; border: 1px solid #feebc8;}
+.caution-block h3 { color: var(--warning-color); }
+
+@media (max-width: 600px) {
+    .form-group-row { flex-direction: column; gap: 0; }
+    .user-summary-grid { grid-template-columns: 1fr; }
+}
