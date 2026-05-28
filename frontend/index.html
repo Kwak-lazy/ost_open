@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개인 맞춤형 운동 추천 시스템</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>개인 맞춤형 운동 추천 시스템</h1>
+        </header>
+
+        <main>
+            <section id="input-section" class="card">
+                <h2>사용자 정보 입력</h2>
+                <form id="recommendation-form">
+                    <div class="form-group-row">
+                        <div class="form-group">
+                            <label for="age">나이 (세)</label>
+                            <input type="number" id="age" min="1" max="120" required placeholder="예: 30">
+                        </div>
+                        <div class="form-group">
+                            <label for="height">키 (cm)</label>
+                            <input type="number" id="height" step="0.1" min="50" max="250" required placeholder="예: 175.5">
+                        </div>
+                        <div class="form-group">
+                            <label for="weight">체중 (kg)</label>
+                            <input type="number" id="weight" step="0.1" min="10" max="300" required placeholder="예: 70.2">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>기저 질환 (중복 선택 가능)</label>
+                        <div class="checkbox-group" id="conditions-group">
+                            </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>통증 부위 (중복 선택 가능)</label>
+                        <div class="checkbox-group" id="pain-group">
+                            </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="goal">운동 목표</label>
+                        <select id="goal" required>
+                            </select>
+                    </div>
+
+                    <button type="submit" class="btn-submit">추천 운동 분석하기</button>
+                </form>
+            </section>
+
+            <section id="result-section" class="card hidden">
+                <div class="result-header">
+                    <h2>📋 분석 결과</h2>
+                    <button id="btn-retry" class="btn-secondary">다시 계산하기 🔄</button>
+                </div>
+
+                <div class="user-summary-grid">
+                    <div class="summary-item"><strong>나이:</strong> <span id="res-age"></span>세</div>
+                    <div class="summary-item"><strong>신체 스펙:</strong> <span id="res-specs"></span></div>
+                    <div class="summary-item"><strong>BMI 지수:</strong> <span id="res-bmi"></span></div>
+                    <div class="summary-item"><strong>운동 목표:</strong> <span id="res-goal"></span></div>
+                </div>
+
+                <div class="result-block">
+                    <h3>🟢 추천 운동</h3>
+                    <ol id="recommended-list" class="exercise-list"></ol>
+                </div>
+
+                <div class="result-block forbidden-block">
+                    <h3>🔴 금지/주의 운동</h3>
+                    <div id="forbidden-container"></div>
+                </div>
+
+                <div class="result-block reason-block">
+                    <h3>💡 추천 이유</h3>
+                    <ul id="reason-list"></ul>
+                </div>
+
+                <div class="result-block caution-block">
+                    <h3>⚠️ 주의사항</h3>
+                    <ul id="caution-list"></ul>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="tmp.js"></script>
+</body>
+</html>
