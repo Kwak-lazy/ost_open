@@ -1,6 +1,5 @@
-from pymongo import MongoClient
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -13,6 +12,7 @@ def get_db():
     if not uri:
         return None
     if _client is None:
+        from pymongo import MongoClient
         _client = MongoClient(uri)
     db_name = os.getenv("MONGO_DB", "ost_open")
     return _client[db_name]
