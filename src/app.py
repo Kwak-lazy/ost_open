@@ -7,6 +7,7 @@ import os
 from src.rule_engine import apply_rules
 from src.bmi import calculate_bmi, classify_bmi
 from src.db import get_db
+from src.user_input import validate_recommend_input
 
 load_dotenv()
 
@@ -22,23 +23,17 @@ def health():
 @app.route("/api/recommend", methods=["POST"])
 def recommend():
     data = request.get_json(silent=True)
-    if not data:
-        return jsonify({"error": "요청 본문이 없습니다."}), 400
+    parsed, error = validate_recommend_input(data)
+    if error:
+        return jsonify({"error": error}), 400
 
-    age = data.get("age")
-    height = data.get("height")
-    weight = data.get("weight")
-    conditions = data.get("conditions", [])
-    pain_area = data.get("pain_area", "없음")
-    goal = data.get("goal", "건강 관리")
-
-    if not all([age, height, weight]):
-        return jsonify({"error": "age, height, weight 는 필수입니다."}), 400
-
-    bmi = calculate_bmi(height, weight)
+    bmi = calculate_bmi(parsed["height"], parsed["weight"])
     bmi_category = classify_bmi(bmi)
 
-    raw = apply_rules(conditions, pain_area, goal, int(age), float(bmi))
+    raw = apply_rules(
+        parsed["conditions"], parsed["pain_area"], parsed["goal"],
+        parsed["age"], float(bmi)
+    )
 
     recommended = [
         {"name": name, "intensity": intensity, "duration": duration, "score": round(score, 2)}
@@ -57,7 +52,7 @@ def recommend():
     db = get_db()
     if db is not None:
         db.history.insert_one({
-            "input": data,
+            "input": parsed,
             "bmi": bmi,
             "bmi_category": bmi_category,
             "result": response,
