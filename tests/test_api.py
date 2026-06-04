@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import patch
-from src.app import app
+from app import app
 
 
 @pytest.fixture
@@ -27,7 +27,7 @@ class TestRecommend:
         "goal": "건강 관리",
     }
 
-    @patch("src.app.get_db", return_value=None)
+    @patch("app.get_db", return_value=None)
     def test_success(self, _, client):
         res = client.post("/api/recommend", json=self.VALID_PAYLOAD)
         assert res.status_code == 200
@@ -37,14 +37,14 @@ class TestRecommend:
         assert "recommended" in data
         assert isinstance(data["recommended"], list)
 
-    @patch("src.app.get_db", return_value=None)
+    @patch("app.get_db", return_value=None)
     def test_bmi_calculated(self, _, client):
         res = client.post("/api/recommend", json=self.VALID_PAYLOAD)
         data = res.get_json()
         assert data["bmi"] == 26.12
         assert data["bmi_category"] == "비만"
 
-    @patch("src.app.get_db", return_value=None)
+    @patch("app.get_db", return_value=None)
     def test_recommended_fields(self, _, client):
         res = client.post("/api/recommend", json=self.VALID_PAYLOAD)
         for ex in res.get_json()["recommended"]:
@@ -63,13 +63,13 @@ class TestRecommend:
                           content_type="application/json")
         assert res.status_code == 400
 
-    @patch("src.app.get_db", return_value=None)
+    @patch("app.get_db", return_value=None)
     def test_no_conditions(self, _, client):
         payload = {**self.VALID_PAYLOAD, "conditions": [], "pain_area": "없음"}
         res = client.post("/api/recommend", json=payload)
         assert res.status_code == 200
 
-    @patch("src.app.get_db", return_value=None)
+    @patch("app.get_db", return_value=None)
     def test_forbidden_not_in_recommended(self, _, client):
         res = client.post("/api/recommend", json=self.VALID_PAYLOAD)
         data = res.get_json()
@@ -80,7 +80,7 @@ class TestRecommend:
 
 
 class TestHistory:
-    @patch("src.app.get_db", return_value=None)
+    @patch("app.get_db", return_value=None)
     def test_no_db_returns_empty_list(self, _, client):
         res = client.get("/api/history")
         assert res.status_code == 200

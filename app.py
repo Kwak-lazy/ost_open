@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template # render_template 추가
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from dotenv import load_dotenv
 from datetime import datetime, timezone
@@ -14,9 +14,7 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-# ──────────────────────────────────────────────────────────
-# 1. 사용자가 처음 접속했을 때 HTML 화면을 띄워주는 라우트 추가
-# ──────────────────────────────────────────────────────────
+
 @app.route("/", methods=["GET"])
 def index():
     return render_template("index.html")
