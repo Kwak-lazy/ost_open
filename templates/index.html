@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>개인 맞춤형 운동 추천 시스템</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <div class="container">
@@ -27,29 +27,50 @@
                         </div>
                         <div class="form-group">
                             <label for="weight">체중 (kg)</label>
-                            <input type="number" id="weight" step="0.1" min="10" max="300" required placeholder="예: 70.2">
+                            <input type="number" id="weight" step="0.1" min="10" max="300" required placeholder="예: 70">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>기저 질환 (중복 선택 가능)</label>
-                        <div class="checkbox-group" id="conditions-group">
-                            </div>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item"><input type="checkbox" name="conditions" value="고혈압"> 고혈압</label>
+                            <label class="checkbox-item"><input type="checkbox" name="conditions" value="당뇨"> 당뇨</label>
+                            <label class="checkbox-item"><input type="checkbox" name="conditions" value="허리디스크"> 허리디스크</label>
+                            <label class="checkbox-item"><input type="checkbox" name="conditions" value="천식"> 천식</label>
+                            <label class="checkbox-item"><input type="checkbox" name="conditions" value="심장질환"> 심장질환</label>
+                            <label class="checkbox-item"><input type="checkbox" name="conditions" value="관절염"> 관절염</label>
+                            <label class="checkbox-item"><input type="checkbox" name="conditions" value="골다공증"> 골다공증</label>
+                            <label class="checkbox-item"><input type="checkbox" name="conditions" value="비만"> 비만</label>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label>통증 부위 (중복 선택 가능)</label>
-                        <div class="checkbox-group" id="pain-group">
-                            </div>
+                        <label for="pain_area">통증 부위</label>
+                        <select id="pain_area" required>
+                            <option value="없음" selected>통증 부위 없음</option>
+                            <option value="목">목</option>
+                            <option value="어깨">어깨</option>
+                            <option value="허리">허리</option>
+                            <option value="무릎">무릎</option>
+                            <option value="손목">손목</option>
+                            <option value="발목">발목</option>
+                            <option value="고관절">고관절</option>
+                            <option value="팔꿈치">팔꿈치</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
                         <label for="goal">운동 목표</label>
                         <select id="goal" required>
-                            </select>
+                            <option value="" disabled selected>-- 목표를 선택하세요 --</option>
+                            <option value="체중 감량">체중 감량 (다이어트)</option>
+                            <option value="근력 증가">근력 증가</option>
+                            <option value="건강 관리">건강 관리</option>
+                        </select>
                     </div>
 
-                    <button type="submit" class="btn-submit">추천 운동 분석하기</button>
+                    <button type="submit" class="btn-primary">추천 운동 분석하기 🚀</button>
                 </form>
             </section>
 
@@ -88,6 +109,7 @@
             </section>
         </main>
     </div>
-    <script src="tmp.js"></script>
+
+    <script src="/static/app.js"></script>
 </body>
 </html>
