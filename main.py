@@ -17,7 +17,7 @@ def get_user_input():
         "age": age,
         "height": height,
         "weight": weight,
-        "condition": disease,
+        "disease": disease,
         "pain_area": pain_area,
         "goal": goal,
     }
@@ -29,10 +29,12 @@ def main():
     bmi = calculate_bmi(user_data["height"], user_data["weight"])
     bmi_category = classify_bmi(bmi)
 
-    user_data["bmi"] = bmi
-    user_data["bmi_category"] = bmi_category
-
-    print_recommendation(user_data)
+    print_recommendation({
+        **user_data,
+        "condition": user_data["disease"],
+        "bmi": bmi,
+        "bmi_category": bmi_category,
+    })
 
 
 if __name__ == "__main__":
