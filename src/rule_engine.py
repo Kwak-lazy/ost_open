@@ -151,34 +151,34 @@ GENERAL_EXERCISES = [
 ]
 
 
-# ──────────────────────────────────────────────
-# 2. 룰 엔진 함수
-# ──────────────────────────────────────────────
-
-def get_forbidden_set(conditions: list, pain_area: str) -> set:
+def get_forbidden_set(conditions: list, pain_area: list) -> set:
     """질환 + 통증 부위를 모두 고려한 금지 운동 집합 반환."""
     forbidden = set()
     for cond in conditions:
         if cond in CONDITION_RULES:
             forbidden.update(CONDITION_RULES[cond]["forbidden"])
-    if pain_area and pain_area in PAIN_RULES:
-        forbidden.update(PAIN_RULES[pain_area]["forbidden"])
+    if pain_area:
+        for area in pain_area:
+            if area in PAIN_RULES:
+                forbidden.update(PAIN_RULES[area]["forbidden"])
     return forbidden
 
 
-def get_cautions(conditions: list, pain_area: str) -> dict:
+def get_cautions(conditions: list, pain_area: list) -> dict:
     """질환 + 통증 부위 주의사항 반환."""
     cautions = {}
     for cond in conditions:
         if cond in CONDITION_RULES and CONDITION_RULES[cond].get("caution"):
             cautions[cond] = CONDITION_RULES[cond]["caution"]
-    if pain_area and pain_area in PAIN_RULES and PAIN_RULES[pain_area].get("caution"):
-        cautions[f"통증 부위({pain_area})"] = PAIN_RULES[pain_area]["caution"]
+    if pain_area:
+        for area in pain_area:
+            if area in PAIN_RULES and PAIN_RULES[area].get("caution"):
+                cautions[f"통증 부위({area})"] = PAIN_RULES[area]["caution"]
     return cautions
 
 
 def score_exercise(exercise: tuple, conditions: list,
-                   pain_area: str, goal: str,
+                   pain_area: list, goal: str,
                    age: int, bmi: float,
                    forbidden_set: set) -> float:
     """
@@ -230,7 +230,7 @@ def score_exercise(exercise: tuple, conditions: list,
     return score
 
 
-def apply_rules(conditions: list, pain_area: str, goal: str,
+def apply_rules(conditions: list, pain_area: list, goal: str,
                 age: int, bmi: float, top_n: int = 5) -> dict:
     """
     전체 룰을 적용해 추천 결과 딕셔너리 반환.
@@ -269,8 +269,10 @@ def apply_rules(conditions: list, pain_area: str, goal: str,
     for cond in conditions:
         if cond in CONDITION_RULES:
             forbidden_by_source[cond] = CONDITION_RULES[cond]["forbidden"]
-    if pain_area and pain_area in PAIN_RULES and PAIN_RULES[pain_area]["forbidden"]:
-        forbidden_by_source[f"통증 부위({pain_area})"] = PAIN_RULES[pain_area]["forbidden"]
+    if pain_area:
+        for area in pain_area:
+            if area in PAIN_RULES and PAIN_RULES[area]["forbidden"]:
+                forbidden_by_source[f"통증 부위({area})"] = PAIN_RULES[area]["forbidden"]
 
     return {
         "recommended": recommended,
