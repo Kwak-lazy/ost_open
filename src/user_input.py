@@ -40,13 +40,16 @@ def validate_recommend_input(data: dict) -> tuple[dict | None, str | None]:
     conditions = data.get("conditions", [])
     if not isinstance(conditions, list):
         return None, "conditions 는 리스트여야 합니다."
-    invalid = [c for c in conditions if c not in VALID_CONDITIONS]
-    if invalid:
-        return None, f"유효하지 않은 기저 질환: {invalid}"
+    invalid_cond = [c for c in conditions if c not in VALID_CONDITIONS]
+    if invalid_cond:
+        return None, f"유효하지 않은 기저 질환: {invalid_cond}"
 
-    pain_area = data.get("pain_area", "없음")
-    if pain_area not in VALID_PAIN_AREAS:
-        return None, f"유효하지 않은 통증 부위: {pain_area}"
+    pain_area = data.get("pain_area", ["없음"])
+    if not isinstance(pain_area, list):
+        return None, "pain_area 는 리스트여야 합니다."
+    invalid_pain = [p for p in pain_area if p not in VALID_PAIN_AREAS]
+    if invalid_pain:
+        return None, f"유효하지 않은 통증 부위: {invalid_pain}"
 
     goal = data.get("goal", "건강 관리")
     if goal not in VALID_GOALS:

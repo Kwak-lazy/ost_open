@@ -46,18 +46,17 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="pain_area">통증 부위</label>
-                        <select id="pain_area" required>
-                            <option value="없음" selected>통증 부위 없음</option>
-                            <option value="목">목</option>
-                            <option value="어깨">어깨</option>
-                            <option value="허리">허리</option>
-                            <option value="무릎">무릎</option>
-                            <option value="손목">손목</option>
-                            <option value="발목">발목</option>
-                            <option value="고관절">고관절</option>
-                            <option value="팔꿈치">팔꿈치</option>
-                        </select>
+                        <label>통증 부위 (중복 선택 가능)</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item"><input type="checkbox" name="pain_area" value="목"> 목</label>
+                            <label class="checkbox-item"><input type="checkbox" name="pain_area" value="어깨"> 어깨</label>
+                            <label class="checkbox-item"><input type="checkbox" name="pain_area" value="허리"> 허리</label>
+                            <label class="checkbox-item"><input type="checkbox" name="pain_area" value="무릎"> 무릎</label>
+                            <label class="checkbox-item"><input type="checkbox" name="pain_area" value="손목"> 손목</label>
+                            <label class="checkbox-item"><input type="checkbox" name="pain_area" value="발목"> 발목</label>
+                            <label class="checkbox-item"><input type="checkbox" name="pain_area" value="고관절"> 고관절</label>
+                            <label class="checkbox-item"><input type="checkbox" name="pain_area" value="팔꿈치"> 팔꿈치</label>
+                        </div>
                     </div>
 
                     <div class="form-group">

@@ -17,7 +17,7 @@ form.addEventListener("submit", async (e) => {
 
     const conditions = Array.from(document.querySelectorAll('input[name="conditions"]:checked')).map(el => el.value);
     const checkedPain = Array.from(document.querySelectorAll('input[name="pain_area"]:checked')).map(el => el.value);
-    const pain_area = checkedPain.length > 0 ? checkedPain[0] : "없음";
+    const pain_area = checkedPain.length > 0 ? checkedPain : ["없음"];
 
     const requestData = {
         age: age,
